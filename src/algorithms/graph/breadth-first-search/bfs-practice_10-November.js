@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import Queue from '../../../data-structures/queue/Queue';
 
 const bfs = (graph, startingVertex) => {
@@ -30,7 +31,7 @@ const bfs_advanced = (graph, startingVertex, customCallbacks) => {
   }
 };
 
-function initCallback(cbs = {}) {
+function initCallbacks(cbs = {}) {
   const initiatedCallbacks = cbs;
   const stubCallback = () => {};
 
