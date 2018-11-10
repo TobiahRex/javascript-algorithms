@@ -14,9 +14,16 @@ const bfsCore = (graph, startingVertex) => {
 const bfsAdvanced = (graph, startingVertex, cbs) => {
   const callbacks = initCallbacks(cbs);
   const vertexQueue = new Queue(startingVertex);
+  const previousVertex = null;
 
-  while(!vertexQueue.isEmpty()) {
+  while (!vertexQueue.isEmpty()) {
     const currentVertex = vertexQueue.dequeue();
-    if (callbacks.allowTraversal())
+    if (callbacks.allowTraversal(currentVertex)) {
+      callbacks.enterVertex({ currentVertex });
+      graph.getNeighbors(currentVertex).forEach((vertex) => {
+        vertexQueue.enqueue(vertex);
+      });
+    }
+    callbacks.leavingVertex({ currentVertex, previousVertex });
   }
-}
+};
